@@ -8,7 +8,7 @@ var db
 
 
 
-MongoClient.connect('mongodb://alvalle09:drumkit09@ds231245.mlab.com:31245/some-favorite-famous-quotes', (err, database) => {
+MongoClient.connect('mongodb://<username>:<pass>@ds231245.mlab.com:31245/some-favorite-famous-quotes', (err, database) => {
     if (err) return console.log(err)
     db = database
     //start the server
