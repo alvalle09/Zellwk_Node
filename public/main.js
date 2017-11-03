@@ -1,7 +1,7 @@
 
-
 var update = document.getElementById('update');
 var del = document.getElementById('delete');
+var delEmpty = document.getElementById('delEmpty');
 
 del.addEventListener('click', function() {
     fetch('quotes', {
@@ -13,12 +13,41 @@ del.addEventListener('click', function() {
             'name': 'Darth Vader'
         })
     })
-    .then(res => {
-        if (res.ok) return res.json()
+    .then(data => {
+        console.log(data)
+        window.location.reload(true)
+    })
+})
+
+delEmpty.addEventListener('click', function() {
+    fetch('quotes', {
+        method: 'delete',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            'name': ''
+        })
     })
     .then(data => {
         console.log(data)
-        window.location.reload()
+        window.location.reload(true)
+    })
+})
+
+del.addEventListener('click', function() {
+    fetch('quotes', {
+        method: 'delete',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            'name': ''
+        })
+    })
+    .then(data => {
+        console.log(data)
+        window.location.reload(true)
     })
 })
 
@@ -38,30 +67,9 @@ update.addEventListener('click', function () {
         return response.json()
     })
     .then(data => {
-      console.log(data)
+      console.log(data);
+      window.location.reload(true);
     })
   })
 
-
-/*
-update.addEventListener('click', function() {
-    //Send PUT Request here
-    fetch('quotes', {
-        method: 'put',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            'name': 'Darth Vader',
-            'quote': 'I find your lack of faith disturbing.'
-        })
-    })
-    .then(response => {
-        if (response.ok) return response.json()
-    })
-    .then(data => {
-        console.log(data)
-        //window.location.reload(true)
-    })
-})
-
-*/
 

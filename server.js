@@ -1,18 +1,17 @@
-console.log('May node be with ou!')
+console.log('May node be with ou!');
 
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const MongoClient = require('mongodb').MongoClient
-var db
-
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient;
+var db;
 
 MongoClient.connect('mongodb://Mytestuser:mytestuserpass@ds231245.mlab.com:31245/some-favorite-famous-quotes', (err, database) => {
-    if (err) return console.log(err)
-    db = database
+    if (err) return console.log(err);
+    db = database;
     //start the server
     app.listen(3000, ()=> {
-        console.log('listening on 3000')
+        console.log('listening on 3000');
     })
 })
 
@@ -20,7 +19,6 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(express.static('public'))
-
 
 app.get('/',  (req, res) => {
     //res.send('Hello World$$$')
@@ -56,6 +54,14 @@ app.put('/quotes', (req, res) =>{
             if (err) return res.send(err)
             res.send(result)
         })
+})
+
+app.delete('/quotes', (req, res) => {
+    db.collection('quotes').findOneAndDelete({name: req.body.name},
+    (err, result) => {
+        if (err) return res.send(500, err)
+        res.send({message: 'A quote was deleted'})
+    })
 })
 
 
